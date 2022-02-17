@@ -1,4 +1,5 @@
 package com.example.optionsview
 
-class StrengthNode: VariantNode() {
+class StrengthNode : VariantNode() {
+    var pricePerUnit: String? = null
 }

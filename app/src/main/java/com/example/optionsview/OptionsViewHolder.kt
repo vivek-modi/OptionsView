@@ -1,6 +1,7 @@
 package com.example.optionsview
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.optionsview.databinding.StrengthItemLayoutBinding
@@ -22,5 +23,9 @@ class OptionsViewHolder(val binding: StrengthItemLayoutBinding) :
 
     fun bindItem(item: VariantNode) {
         binding.variantText.text = item.value?.value
+        if (item is StrengthNode) {
+            binding.variantPrice.visibility = View.VISIBLE
+            binding.variantPrice.text = item.pricePerUnit
+        }
     }
 }

@@ -28,6 +28,7 @@ class ActivityViewModel : ViewModel() {
                 }
                 val tempNode = StrengthNode().apply {
                     value = strength
+                    pricePerUnit = productVariant.pricePerUnit?.value
                 }
                 baseNode.children.add(tempNode)
                 tempHashMap["strength_${strength.value}"] = tempNode
@@ -61,106 +62,606 @@ class ActivityViewModel : ViewModel() {
 
     private fun getUnSortedDataList(): List<ProductVariant> {
         return listOf(
-            ProductVariant(ProductValue("75"), ProductValue("14"), ProductValue("1")),
-            ProductVariant(ProductValue("75"), ProductValue("14"), ProductValue("3")),
-            ProductVariant(ProductValue("75"), ProductValue("14"), ProductValue("6")),
-            ProductVariant(ProductValue("75"), ProductValue("14"), ProductValue("9")),
-            ProductVariant(ProductValue("75"), ProductValue("14"), ProductValue("12")),
-            ProductVariant(ProductValue("25"), ProductValue("8"), ProductValue("1")),
-            ProductVariant(ProductValue("25"), ProductValue("8"), ProductValue("3")),
-            ProductVariant(ProductValue("25"), ProductValue("8"), ProductValue("6")),
-            ProductVariant(ProductValue("25"), ProductValue("8"), ProductValue("9")),
-            ProductVariant(ProductValue("25"), ProductValue("8"), ProductValue("12")),
-            ProductVariant(ProductValue("50"), ProductValue("14"), ProductValue("1")),
-            ProductVariant(ProductValue("50"), ProductValue("14"), ProductValue("3")),
-            ProductVariant(ProductValue("50"), ProductValue("14"), ProductValue("6")),
-            ProductVariant(ProductValue("50"), ProductValue("14"), ProductValue("9")),
-            ProductVariant(ProductValue("50"), ProductValue("14"), ProductValue("12")),
-            ProductVariant(ProductValue("75"), ProductValue("10"), ProductValue("1")),
-            ProductVariant(ProductValue("75"), ProductValue("10"), ProductValue("3")),
-            ProductVariant(ProductValue("75"), ProductValue("10"), ProductValue("6")),
-            ProductVariant(ProductValue("75"), ProductValue("10"), ProductValue("9")),
-            ProductVariant(ProductValue("75"), ProductValue("10"), ProductValue("12")),
-            ProductVariant(ProductValue("25"), ProductValue("2"), ProductValue("1")),
-            ProductVariant(ProductValue("25"), ProductValue("2"), ProductValue("3")),
-            ProductVariant(ProductValue("25"), ProductValue("2"), ProductValue("6")),
-            ProductVariant(ProductValue("25"), ProductValue("2"), ProductValue("9")),
-            ProductVariant(ProductValue("25"), ProductValue("2"), ProductValue("12")),
-            ProductVariant(ProductValue("25"), ProductValue("4"), ProductValue("1")),
-            ProductVariant(ProductValue("25"), ProductValue("4"), ProductValue("3")),
-            ProductVariant(ProductValue("25"), ProductValue("4"), ProductValue("6")),
-            ProductVariant(ProductValue("25"), ProductValue("4"), ProductValue("9")),
-            ProductVariant(ProductValue("25"), ProductValue("4"), ProductValue("12")),
-            ProductVariant(ProductValue("25"), ProductValue("6"), ProductValue("1")),
-            ProductVariant(ProductValue("25"), ProductValue("6"), ProductValue("3")),
-            ProductVariant(ProductValue("25"), ProductValue("6"), ProductValue("6")),
-            ProductVariant(ProductValue("25"), ProductValue("6"), ProductValue("9")),
-            ProductVariant(ProductValue("25"), ProductValue("6"), ProductValue("12")),
-            ProductVariant(ProductValue("25"), ProductValue("10"), ProductValue("1")),
-            ProductVariant(ProductValue("25"), ProductValue("10"), ProductValue("3")),
-            ProductVariant(ProductValue("25"), ProductValue("10"), ProductValue("6")),
-            ProductVariant(ProductValue("25"), ProductValue("10"), ProductValue("9")),
-            ProductVariant(ProductValue("25"), ProductValue("10"), ProductValue("12")),
-            ProductVariant(ProductValue("25"), ProductValue("12"), ProductValue("1")),
-            ProductVariant(ProductValue("25"), ProductValue("12"), ProductValue("3")),
-            ProductVariant(ProductValue("25"), ProductValue("12"), ProductValue("6")),
-            ProductVariant(ProductValue("25"), ProductValue("12"), ProductValue("9")),
-            ProductVariant(ProductValue("25"), ProductValue("12"), ProductValue("12")),
-            ProductVariant(ProductValue("25"), ProductValue("14"), ProductValue("1")),
-            ProductVariant(ProductValue("25"), ProductValue("14"), ProductValue("3")),
-            ProductVariant(ProductValue("25"), ProductValue("14"), ProductValue("6")),
-            ProductVariant(ProductValue("25"), ProductValue("14"), ProductValue("9")),
-            ProductVariant(ProductValue("25"), ProductValue("14"), ProductValue("12")),
-            ProductVariant(ProductValue("50"), ProductValue("2"), ProductValue("1")),
-            ProductVariant(ProductValue("50"), ProductValue("2"), ProductValue("3")),
-            ProductVariant(ProductValue("50"), ProductValue("2"), ProductValue("6")),
-            ProductVariant(ProductValue("50"), ProductValue("2"), ProductValue("9")),
-            ProductVariant(ProductValue("50"), ProductValue("2"), ProductValue("12")),
-            ProductVariant(ProductValue("50"), ProductValue("4"), ProductValue("1")),
-            ProductVariant(ProductValue("50"), ProductValue("4"), ProductValue("3")),
-            ProductVariant(ProductValue("50"), ProductValue("4"), ProductValue("6")),
-            ProductVariant(ProductValue("50"), ProductValue("4"), ProductValue("9")),
-            ProductVariant(ProductValue("50"), ProductValue("4"), ProductValue("12")),
-            ProductVariant(ProductValue("50"), ProductValue("6"), ProductValue("1")),
-            ProductVariant(ProductValue("50"), ProductValue("6"), ProductValue("3")),
-            ProductVariant(ProductValue("50"), ProductValue("6"), ProductValue("6")),
-            ProductVariant(ProductValue("50"), ProductValue("6"), ProductValue("9")),
-            ProductVariant(ProductValue("50"), ProductValue("6"), ProductValue("12")),
-            ProductVariant(ProductValue("50"), ProductValue("12"), ProductValue("1")),
-            ProductVariant(ProductValue("50"), ProductValue("12"), ProductValue("3")),
-            ProductVariant(ProductValue("50"), ProductValue("12"), ProductValue("6")),
-            ProductVariant(ProductValue("50"), ProductValue("12"), ProductValue("9")),
-            ProductVariant(ProductValue("50"), ProductValue("12"), ProductValue("12")),
-            ProductVariant(ProductValue("75"), ProductValue("2"), ProductValue("1")),
-            ProductVariant(ProductValue("75"), ProductValue("2"), ProductValue("3")),
-            ProductVariant(ProductValue("75"), ProductValue("2"), ProductValue("6")),
-            ProductVariant(ProductValue("75"), ProductValue("2"), ProductValue("9")),
-            ProductVariant(ProductValue("75"), ProductValue("2"), ProductValue("12")),
-            ProductVariant(ProductValue("75"), ProductValue("6"), ProductValue("1")),
-            ProductVariant(ProductValue("75"), ProductValue("6"), ProductValue("3")),
-            ProductVariant(ProductValue("75"), ProductValue("6"), ProductValue("6")),
-            ProductVariant(ProductValue("75"), ProductValue("6"), ProductValue("9")),
-            ProductVariant(ProductValue("75"), ProductValue("6"), ProductValue("12")),
-            ProductVariant(ProductValue("75"), ProductValue("8"), ProductValue("1")),
-            ProductVariant(ProductValue("75"), ProductValue("8"), ProductValue("3")),
-            ProductVariant(ProductValue("75"), ProductValue("8"), ProductValue("6")),
-            ProductVariant(ProductValue("75"), ProductValue("8"), ProductValue("9")),
-            ProductVariant(ProductValue("75"), ProductValue("8"), ProductValue("12")),
-            ProductVariant(ProductValue("75"), ProductValue("12"), ProductValue("1")),
-            ProductVariant(ProductValue("75"), ProductValue("12"), ProductValue("3")),
-            ProductVariant(ProductValue("75"), ProductValue("12"), ProductValue("6")),
-            ProductVariant(ProductValue("75"), ProductValue("12"), ProductValue("9")),
-            ProductVariant(ProductValue("75"), ProductValue("12"), ProductValue("12")),
-            ProductVariant(ProductValue("50"), ProductValue("8"), ProductValue("1")),
-            ProductVariant(ProductValue("50"), ProductValue("8"), ProductValue("3")),
-            ProductVariant(ProductValue("50"), ProductValue("8"), ProductValue("6")),
-            ProductVariant(ProductValue("50"), ProductValue("8"), ProductValue("9")),
-            ProductVariant(ProductValue("50"), ProductValue("8"), ProductValue("12")),
-            ProductVariant(ProductValue("75"), ProductValue("4"), ProductValue("1")),
-            ProductVariant(ProductValue("75"), ProductValue("4"), ProductValue("3")),
-            ProductVariant(ProductValue("75"), ProductValue("4"), ProductValue("6")),
-            ProductVariant(ProductValue("75"), ProductValue("4"), ProductValue("9")),
-            ProductVariant(ProductValue("75"), ProductValue("4"), ProductValue("12"))
+            ProductVariant(
+                ProductValue("75"),
+                ProductValue("14"),
+                ProductValue("1"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("75"),
+                ProductValue("14"),
+                ProductValue("3"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("75"),
+                ProductValue("14"),
+                ProductValue("6"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("75"),
+                ProductValue("14"),
+                ProductValue("9"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("75"),
+                ProductValue("14"),
+                ProductValue("12"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("25"),
+                ProductValue("8"),
+                ProductValue("1"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("25"),
+                ProductValue("8"),
+                ProductValue("3"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("25"),
+                ProductValue("8"),
+                ProductValue("6"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("25"),
+                ProductValue("8"),
+                ProductValue("9"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("25"),
+                ProductValue("8"),
+                ProductValue("12"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("50"),
+                ProductValue("14"),
+                ProductValue("1"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("50"),
+                ProductValue("14"),
+                ProductValue("3"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("50"),
+                ProductValue("14"),
+                ProductValue("6"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("50"),
+                ProductValue("14"),
+                ProductValue("9"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("50"),
+                ProductValue("14"),
+                ProductValue("12"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("75"),
+                ProductValue("10"),
+                ProductValue("1"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("75"),
+                ProductValue("10"),
+                ProductValue("3"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("75"),
+                ProductValue("10"),
+                ProductValue("6"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("75"),
+                ProductValue("10"),
+                ProductValue("9"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("75"),
+                ProductValue("10"),
+                ProductValue("12"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("25"),
+                ProductValue("2"),
+                ProductValue("1"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("25"),
+                ProductValue("2"),
+                ProductValue("3"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("25"),
+                ProductValue("2"),
+                ProductValue("6"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("25"),
+                ProductValue("2"),
+                ProductValue("9"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("25"),
+                ProductValue("2"),
+                ProductValue("12"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("25"),
+                ProductValue("4"),
+                ProductValue("1"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("25"),
+                ProductValue("4"),
+                ProductValue("3"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("25"),
+                ProductValue("4"),
+                ProductValue("6"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("25"),
+                ProductValue("4"),
+                ProductValue("9"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("25"),
+                ProductValue("4"),
+                ProductValue("12"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("25"),
+                ProductValue("6"),
+                ProductValue("1"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("25"),
+                ProductValue("6"),
+                ProductValue("3"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("25"),
+                ProductValue("6"),
+                ProductValue("6"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("25"),
+                ProductValue("6"),
+                ProductValue("9"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("25"),
+                ProductValue("6"),
+                ProductValue("12"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("25"),
+                ProductValue("10"),
+                ProductValue("1"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("25"),
+                ProductValue("10"),
+                ProductValue("3"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("25"),
+                ProductValue("10"),
+                ProductValue("6"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("25"),
+                ProductValue("10"),
+                ProductValue("9"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("25"),
+                ProductValue("10"),
+                ProductValue("12"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("25"),
+                ProductValue("12"),
+                ProductValue("1"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("25"),
+                ProductValue("12"),
+                ProductValue("3"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("25"),
+                ProductValue("12"),
+                ProductValue("6"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("25"),
+                ProductValue("12"),
+                ProductValue("9"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("25"),
+                ProductValue("12"),
+                ProductValue("12"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("25"),
+                ProductValue("14"),
+                ProductValue("1"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("25"),
+                ProductValue("14"),
+                ProductValue("3"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("25"),
+                ProductValue("14"),
+                ProductValue("6"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("25"),
+                ProductValue("14"),
+                ProductValue("9"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("25"),
+                ProductValue("14"),
+                ProductValue("12"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("50"),
+                ProductValue("2"),
+                ProductValue("1"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("50"),
+                ProductValue("2"),
+                ProductValue("3"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("50"),
+                ProductValue("2"),
+                ProductValue("6"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("50"),
+                ProductValue("2"),
+                ProductValue("9"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("50"),
+                ProductValue("2"),
+                ProductValue("12"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("50"),
+                ProductValue("4"),
+                ProductValue("1"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("50"),
+                ProductValue("4"),
+                ProductValue("3"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("50"),
+                ProductValue("4"),
+                ProductValue("6"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("50"),
+                ProductValue("4"),
+                ProductValue("9"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("50"),
+                ProductValue("4"),
+                ProductValue("12"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("50"),
+                ProductValue("6"),
+                ProductValue("1"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("50"),
+                ProductValue("6"),
+                ProductValue("3"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("50"),
+                ProductValue("6"),
+                ProductValue("6"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("50"),
+                ProductValue("6"),
+                ProductValue("9"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("50"),
+                ProductValue("6"),
+                ProductValue("12"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("50"),
+                ProductValue("12"),
+                ProductValue("1"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("50"),
+                ProductValue("12"),
+                ProductValue("3"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("50"),
+                ProductValue("12"),
+                ProductValue("6"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("50"),
+                ProductValue("12"),
+                ProductValue("9"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("50"),
+                ProductValue("12"),
+                ProductValue("12"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("75"),
+                ProductValue("2"),
+                ProductValue("1"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("75"),
+                ProductValue("2"),
+                ProductValue("3"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("75"),
+                ProductValue("2"),
+                ProductValue("6"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("75"),
+                ProductValue("2"),
+                ProductValue("9"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("75"),
+                ProductValue("2"),
+                ProductValue("12"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("75"),
+                ProductValue("6"),
+                ProductValue("1"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("75"),
+                ProductValue("6"),
+                ProductValue("3"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("75"),
+                ProductValue("6"),
+                ProductValue("6"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("75"),
+                ProductValue("6"),
+                ProductValue("9"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("75"),
+                ProductValue("6"),
+                ProductValue("12"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("75"),
+                ProductValue("8"),
+                ProductValue("1"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("75"),
+                ProductValue("8"),
+                ProductValue("3"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("75"),
+                ProductValue("8"),
+                ProductValue("6"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("75"),
+                ProductValue("8"),
+                ProductValue("9"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("75"),
+                ProductValue("8"),
+                ProductValue("12"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("75"),
+                ProductValue("12"),
+                ProductValue("1"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("75"),
+                ProductValue("12"),
+                ProductValue("3"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("75"),
+                ProductValue("12"),
+                ProductValue("6"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("75"),
+                ProductValue("12"),
+                ProductValue("9"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("75"),
+                ProductValue("12"),
+                ProductValue("12"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("50"),
+                ProductValue("8"),
+                ProductValue("1"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("50"),
+                ProductValue("8"),
+                ProductValue("3"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("50"),
+                ProductValue("8"),
+                ProductValue("6"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("50"),
+                ProductValue("8"),
+                ProductValue("9"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("50"),
+                ProductValue("8"),
+                ProductValue("12"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("75"),
+                ProductValue("4"),
+                ProductValue("1"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("75"),
+                ProductValue("4"),
+                ProductValue("3"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("75"),
+                ProductValue("4"),
+                ProductValue("6"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("75"),
+                ProductValue("4"),
+                ProductValue("9"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                ProductValue("75"),
+                ProductValue("4"),
+                ProductValue("12"),
+                ProductValue("1.50")
+            )
         )
     }
 
