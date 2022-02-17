@@ -30,7 +30,6 @@ class ActivityViewModel : ViewModel() {
                 val tempNode = StrengthNode().apply {
                     value = strength
                     pricePerUnit = productVariant.pricePerUnit?.value
-                    defaultValue = (productVariant.id == defaultValueId)
                 }
                 baseNode.children.add(tempNode)
                 tempHashMap["strength_${strength.value}"] = tempNode
@@ -41,7 +40,6 @@ class ActivityViewModel : ViewModel() {
                 }
                 val tempNode = QuantityNode().apply {
                     value = quantity
-                    defaultValue = productVariant.id == defaultValueId
                 }
                 val parent =
                     tempHashMap["strength_${productVariant.strength?.value}"] ?: baseNode
@@ -53,7 +51,6 @@ class ActivityViewModel : ViewModel() {
             productVariant.subscription?.let { subscription ->
                 val tempNode = SubscriptionNode().apply {
                     value = subscription
-                    defaultValue = productVariant.id == defaultValueId
                 }
                 val parent =
                     tempHashMap["strength_${productVariant.strength?.value}_quantity_${productVariant.quantity?.value}"]
