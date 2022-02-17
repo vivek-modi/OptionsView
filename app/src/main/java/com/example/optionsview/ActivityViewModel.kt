@@ -112,7 +112,7 @@ class ActivityViewModel : ViewModel() {
                 ProductValue("1.50")
             ),
             ProductVariant(
-                "552",
+                "553242",
                 ProductValue("25"),
                 ProductValue("8"),
                 ProductValue("6"),
@@ -154,14 +154,14 @@ class ActivityViewModel : ViewModel() {
                 ProductValue("1.50")
             ),
             ProductVariant(
-                "442",
+                "442342",
                 ProductValue("50"),
                 ProductValue("14"),
                 ProductValue("9"),
                 ProductValue("1.50")
             ),
             ProductVariant(
-                "232",
+                "324232",
                 ProductValue("50"),
                 ProductValue("14"),
                 ProductValue("12"),
