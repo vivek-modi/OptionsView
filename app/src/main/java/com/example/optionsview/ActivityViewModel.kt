@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 class ActivityViewModel : ViewModel() {
 
     var baseNode: VariantNode = VariantNode()
+    private val defaultValueId = "12643423243324"
 
     init {
         createGraph()
@@ -29,6 +30,7 @@ class ActivityViewModel : ViewModel() {
                 val tempNode = StrengthNode().apply {
                     value = strength
                     pricePerUnit = productVariant.pricePerUnit?.value
+                    defaultValue = (productVariant.id == defaultValueId)
                 }
                 baseNode.children.add(tempNode)
                 tempHashMap["strength_${strength.value}"] = tempNode
@@ -39,6 +41,7 @@ class ActivityViewModel : ViewModel() {
                 }
                 val tempNode = QuantityNode().apply {
                     value = quantity
+                    defaultValue = productVariant.id == defaultValueId
                 }
                 val parent =
                     tempHashMap["strength_${productVariant.strength?.value}"] ?: baseNode
@@ -50,6 +53,7 @@ class ActivityViewModel : ViewModel() {
             productVariant.subscription?.let { subscription ->
                 val tempNode = SubscriptionNode().apply {
                     value = subscription
+                    defaultValue = productVariant.id == defaultValueId
                 }
                 val parent =
                     tempHashMap["strength_${productVariant.strength?.value}_quantity_${productVariant.quantity?.value}"]
@@ -511,21 +515,21 @@ class ActivityViewModel : ViewModel() {
                 ProductValue("1.50")
             ),
             ProductVariant(
-                "12643324",
+                "12643324324",
                 ProductValue("50"),
                 ProductValue("6"),
                 ProductValue("12"),
                 ProductValue("1.50")
             ),
             ProductVariant(
-                "12643324",
+                "12643332423424",
                 ProductValue("50"),
                 ProductValue("12"),
                 ProductValue("1"),
                 ProductValue("1.50")
             ),
             ProductVariant(
-                "12643324",
+                "12643243243324",
                 ProductValue("50"),
                 ProductValue("12"),
                 ProductValue("3"),
@@ -546,7 +550,7 @@ class ActivityViewModel : ViewModel() {
                 ProductValue("1.50")
             ),
             ProductVariant(
-                "12643324",
+                "12643423243324",
                 ProductValue("50"),
                 ProductValue("12"),
                 ProductValue("12"),
@@ -679,42 +683,42 @@ class ActivityViewModel : ViewModel() {
                 ProductValue("1.50")
             ),
             ProductVariant(
-                "12643324",
+                "1264332434324",
                 ProductValue("75"),
                 ProductValue("12"),
                 ProductValue("9"),
                 ProductValue("1.50")
             ),
             ProductVariant(
-                "12643324",
+                "12642342343324",
                 ProductValue("75"),
                 ProductValue("12"),
                 ProductValue("12"),
                 ProductValue("1.50")
             ),
             ProductVariant(
-                "12643324",
+                "1266576743324",
                 ProductValue("50"),
                 ProductValue("8"),
                 ProductValue("1"),
                 ProductValue("1.50")
             ),
             ProductVariant(
-                "12643324",
+                "1256765643324",
                 ProductValue("50"),
                 ProductValue("8"),
                 ProductValue("3"),
                 ProductValue("1.50")
             ),
             ProductVariant(
-                "12643324",
+                "16752643324",
                 ProductValue("50"),
                 ProductValue("8"),
                 ProductValue("6"),
                 ProductValue("1.50")
             ),
             ProductVariant(
-                "12643324",
+                "12756643324",
                 ProductValue("50"),
                 ProductValue("8"),
                 ProductValue("9"),
@@ -735,14 +739,14 @@ class ActivityViewModel : ViewModel() {
                 ProductValue("1.50")
             ),
             ProductVariant(
-                "12643324",
+                "126437657657324",
                 ProductValue("75"),
                 ProductValue("4"),
                 ProductValue("3"),
                 ProductValue("1.50")
             ),
             ProductVariant(
-                "12643324",
+                "12645765673324",
                 ProductValue("75"),
                 ProductValue("4"),
                 ProductValue("6"),

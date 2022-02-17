@@ -1,4 +1,5 @@
 package com.example.optionsview
 
-class QuantityNode: VariantNode() {
+class QuantityNode : VariantNode() {
+    var defaultValue: Boolean? = null
 }
