@@ -1,5 +1,6 @@
 package com.example.optionsview
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,6 +25,7 @@ class OptionsViewHolder(val binding: StrengthItemLayoutBinding) :
     fun bindItem(item: VariantNode) {
         binding.variantText.text = item.value?.value
         if (item is StrengthNode) {
+            Log.e("item","${item.defaultValue}")
             binding.variantPrice.visibility = View.VISIBLE
             binding.variantPrice.text = item.pricePerUnit
         }

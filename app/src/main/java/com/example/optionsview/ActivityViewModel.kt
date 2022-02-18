@@ -13,17 +13,11 @@ class ActivityViewModel : ViewModel() {
 
     private fun createGraph() {
         val tempHashMap: MutableMap<String, VariantNode> = mutableMapOf()
-        val getUnSortedDataList = getUnSortedDataList()
-        val sortedList = getUnSortedDataList.sortedWith(
-            compareBy<ProductVariant> {   // or compareByDescending
-                it.strength?.value?.toInt() ?: 0   // or java.lang.Integer.MAX_VALUE
-            }.thenBy {                    // or thenByDescending
-                it.quantity?.value?.toInt() ?: 0   // or java.lang.Integer.MAX_VALUE
-            }
-        )
+        val sortedList = getSortedList()
 
         sortedList.forEach { productVariant ->
             productVariant.strength?.let { strength ->
+                baseNode.defaultValue = productVariant.id == defaultValueId
                 if (tempHashMap.containsKey("strength_${strength.value}")) {
                     return@let
                 }
@@ -35,6 +29,7 @@ class ActivityViewModel : ViewModel() {
                 tempHashMap["strength_${strength.value}"] = tempNode
             }
             productVariant.quantity?.let { quantity ->
+                baseNode.defaultValue = productVariant.id == defaultValueId
                 if (tempHashMap.containsKey("strength_${productVariant.strength?.value}_quantity_${quantity.value}")) {
                     return@let
                 }
@@ -49,6 +44,7 @@ class ActivityViewModel : ViewModel() {
                     tempNode
             }
             productVariant.subscription?.let { subscription ->
+                baseNode.defaultValue = productVariant.id == defaultValueId
                 val tempNode = SubscriptionNode().apply {
                     value = subscription
                 }
@@ -58,7 +54,17 @@ class ActivityViewModel : ViewModel() {
                 parent.children.add(tempNode)
             }
         }
-        baseNode
+    }
+
+    private fun getSortedList(): List<ProductVariant> {
+        val getUnSortedDataList = getUnSortedDataList()
+        return getUnSortedDataList.sortedWith(
+            compareBy<ProductVariant> {   // or compareByDescending
+                it.strength?.value?.toInt() ?: 0   // or java.lang.Integer.MAX_VALUE
+            }.thenBy {                    // or thenByDescending
+                it.quantity?.value?.toInt() ?: 0   // or java.lang.Integer.MAX_VALUE
+            }
+        )
     }
 
     private fun getUnSortedDataList(): List<ProductVariant> {
