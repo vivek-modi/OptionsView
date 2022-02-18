@@ -17,8 +17,13 @@ class ActivityViewModel : ViewModel() {
 
         sortedList.forEach { productVariant ->
             productVariant.strength?.let { strength ->
-                if (tempHashMap.containsKey("strength_${strength.value}")) {
-
+                val tempHashMapNode = tempHashMap["strength_${strength.value}"]
+                if (tempHashMapNode != null) {
+                    if (tempHashMapNode is StrengthNode) {
+                        if (productVariant.id == defaultValueId) {
+                            tempHashMapNode.defaultValue.compareAndSet(false, true)
+                        }
+                    }
                     return@let
                 }
                 val tempNode = StrengthNode().apply {
@@ -32,22 +37,34 @@ class ActivityViewModel : ViewModel() {
                 tempHashMap["strength_${strength.value}"] = tempNode
             }
             productVariant.quantity?.let { quantity ->
-                if (tempHashMap.containsKey("strength_${productVariant.strength?.value}_quantity_${quantity.value}")) {
+                val tempHashMapNode =
+                    tempHashMap["strength_${productVariant.strength?.value}_quantity_${quantity.value}"]
+                if (tempHashMapNode != null) {
+                    if (tempHashMapNode is QuantityNode) {
+                        if (productVariant.id == defaultValueId) {
+                            tempHashMapNode.defaultValue.compareAndSet(false, true)
+                        }
+                    }
                     return@let
                 }
                 val tempNode = QuantityNode().apply {
                     value = quantity
+                    if (productVariant.id == defaultValueId) {
+                        defaultValue.compareAndSet(false, true)
+                    }
                 }
                 val parent =
                     tempHashMap["strength_${productVariant.strength?.value}"] ?: baseNode
                 parent.children.add(tempNode)
-
                 tempHashMap["strength_${productVariant.strength?.value}_quantity_${quantity.value}"] =
                     tempNode
             }
             productVariant.subscription?.let { subscription ->
                 val tempNode = SubscriptionNode().apply {
                     value = subscription
+                    if (productVariant.id == defaultValueId) {
+                        defaultValue.compareAndSet(false, true)
+                    }
                 }
                 val parent =
                     tempHashMap["strength_${productVariant.strength?.value}_quantity_${productVariant.quantity?.value}"]
