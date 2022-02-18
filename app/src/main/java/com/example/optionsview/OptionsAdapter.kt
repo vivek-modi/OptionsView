@@ -44,6 +44,13 @@ class OptionsAdapter(
         holder.binding.root.setOnClickListener {
             selectedItemPosition = position
         }
+        when (currentItem) {
+            is StrengthNode -> {
+                if (currentItem.defaultValue.get()) {
+                    selectedItemPosition = position
+                }
+            }
+        }
         val drawableColor = if (selectedItemPosition == position) {
             itemClickListener.onClickItem(currentItem)
             R.drawable.options_item_selected_background
