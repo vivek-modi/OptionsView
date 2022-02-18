@@ -17,19 +17,21 @@ class ActivityViewModel : ViewModel() {
 
         sortedList.forEach { productVariant ->
             productVariant.strength?.let { strength ->
-                baseNode.defaultValue = productVariant.id == defaultValueId
                 if (tempHashMap.containsKey("strength_${strength.value}")) {
+
                     return@let
                 }
                 val tempNode = StrengthNode().apply {
                     value = strength
                     pricePerUnit = productVariant.pricePerUnit?.value
+                    if (productVariant.id == defaultValueId) {
+                        defaultValue.compareAndSet(false, true)
+                    }
                 }
                 baseNode.children.add(tempNode)
                 tempHashMap["strength_${strength.value}"] = tempNode
             }
             productVariant.quantity?.let { quantity ->
-                baseNode.defaultValue = productVariant.id == defaultValueId
                 if (tempHashMap.containsKey("strength_${productVariant.strength?.value}_quantity_${quantity.value}")) {
                     return@let
                 }
@@ -44,7 +46,6 @@ class ActivityViewModel : ViewModel() {
                     tempNode
             }
             productVariant.subscription?.let { subscription ->
-                baseNode.defaultValue = productVariant.id == defaultValueId
                 val tempNode = SubscriptionNode().apply {
                     value = subscription
                 }
@@ -54,6 +55,7 @@ class ActivityViewModel : ViewModel() {
                 parent.children.add(tempNode)
             }
         }
+        baseNode
     }
 
     private fun getSortedList(): List<ProductVariant> {
