@@ -1,14 +1,22 @@
 package com.example.optionsview
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 
 class ActivityViewModel : ViewModel() {
 
     var baseNode: VariantNode = VariantNode()
+    var strengthSearchIndex: Int = 0
+    var quantitySearchIndex: Int = 0
     private val defaultValueId = "12643423243324"
 
     init {
-        createGraph()
+        viewModelScope.launch {
+            createGraph()
+            getStrengthNodeDefaultValuePosition()
+            getQuantityNodeDefaultValuePosition()
+        }
     }
 
     private fun createGraph() {
@@ -73,6 +81,24 @@ class ActivityViewModel : ViewModel() {
             }
         }
         baseNode
+    }
+
+    private fun getStrengthNodeDefaultValuePosition() {
+        baseNode.children.mapIndexed { index, strengthVariantNode ->
+            if ((strengthVariantNode as StrengthNode).defaultValue.get()) {
+                strengthSearchIndex = index
+            }
+        }
+    }
+
+    private fun getQuantityNodeDefaultValuePosition() {
+        baseNode.children.mapIndexed { _, strengthVariantNode ->
+            strengthVariantNode.children.mapIndexed { index, variantNode ->
+                if ((variantNode as QuantityNode).defaultValue.get()) {
+                    quantitySearchIndex = index
+                }
+            }
+        }
     }
 
     private fun getSortedList(): List<ProductVariant> {

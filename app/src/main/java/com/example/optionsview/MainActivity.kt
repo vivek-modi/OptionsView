@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
     }
     private val subscriptionItemClickListener = object : ItemClickListener {
         override fun onClickItem(currentItem: VariantNode) {
-            Log.e("currentItem","${currentItem.value}")
+            Log.e("currentItem", "${currentItem.value}")
         }
     }
     private val strengthAdapter = OptionsAdapter(strengthItemClickListener)
@@ -43,12 +43,16 @@ class MainActivity : AppCompatActivity() {
             layoutManager =
                 LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
             adapter = strengthAdapter
+        }.post {
+            strengthAdapter.selectedItemPosition = viewModel.strengthSearchIndex
         }
 
         binding.supplyRecyclerView.apply {
             layoutManager =
                 LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
             adapter = supplyAdapter
+        }.post {
+            supplyAdapter.selectedItemPosition = viewModel.quantitySearchIndex
         }
 
         binding.subscriptionRecyclerView.apply {
