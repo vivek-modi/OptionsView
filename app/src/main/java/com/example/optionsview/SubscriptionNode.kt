@@ -4,4 +4,5 @@ import java.util.concurrent.atomic.AtomicBoolean
 
 class SubscriptionNode : VariantNode() {
     var defaultValue = AtomicBoolean(false)
+    var productVariant: ProductVariant? = null
 }

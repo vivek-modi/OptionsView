@@ -76,6 +76,7 @@ class ActivityViewModel : ViewModel() {
                     if (productVariant.id == defaultValueId) {
                         defaultValue.compareAndSet(false, true)
                     }
+                    this.productVariant = productVariant
                 }
                 val parent =
                     tempHashMap["strength_${productVariant.strength?.value}_quantity_${productVariant.quantity?.value}"]
