@@ -15,9 +15,7 @@ class ActivityViewModel : ViewModel() {
     init {
         viewModelScope.launch {
             createGraph()
-            getStrengthNodeDefaultValuePosition()
-            getQuantityNodeDefaultValuePosition()
-            getSubscriptionNodeDefaultValuePosition()
+            getNodeDefaultValuePosition()
         }
     }
 
@@ -85,27 +83,15 @@ class ActivityViewModel : ViewModel() {
         baseNode
     }
 
-    private fun getStrengthNodeDefaultValuePosition() {
-        baseNode.children.mapIndexed { index, strengthVariantNode ->
+    private fun getNodeDefaultValuePosition() {
+        baseNode.children.mapIndexed { strengthIndex, strengthVariantNode ->
             if ((strengthVariantNode as StrengthNode).defaultValue.get()) {
-                strengthSearchIndex = index
+                strengthSearchIndex = strengthIndex
             }
-        }
-    }
-
-    private fun getQuantityNodeDefaultValuePosition() {
-        baseNode.children.mapIndexed { _, strengthVariantNode ->
-            strengthVariantNode.children.mapIndexed { index, variantNode ->
-                if ((variantNode as QuantityNode).defaultValue.get()) {
-                    quantitySearchIndex = index
+            strengthVariantNode.children.mapIndexed { quantityIndex, quantityVariantNode ->
+                if ((quantityVariantNode as QuantityNode).defaultValue.get()) {
+                    quantitySearchIndex = quantityIndex
                 }
-            }
-        }
-    }
-
-    private fun getSubscriptionNodeDefaultValuePosition() {
-        baseNode.children.mapIndexed { _, strengthVariantNode ->
-            strengthVariantNode.children.mapIndexed { _, quantityVariantNode ->
                 quantityVariantNode.children.mapIndexed { index, variantNode ->
                     if ((variantNode as SubscriptionNode).defaultValue.get()) {
                         subsriptionSearchIndex = index
