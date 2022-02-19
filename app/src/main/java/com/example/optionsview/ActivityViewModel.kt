@@ -2,8 +2,6 @@ package com.example.optionsview
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.launch
 
 class ActivityViewModel : ViewModel() {
 
@@ -14,10 +12,8 @@ class ActivityViewModel : ViewModel() {
     private val defaultValueId = "12643423243324"
 
     init {
-        viewModelScope.launch {
-            createGraph()
-            getNodeDefaultValuePosition()
-        }
+        createGraph()
+        getNodeDefaultValuePosition()
     }
 
     private fun createGraph() {
