@@ -25,7 +25,7 @@ class OptionsViewHolder(val binding: StrengthItemLayoutBinding) :
         binding.variantText.text = item.value?.value
         if (item is StrengthNode) {
             binding.variantPrice.visibility = View.VISIBLE
-            binding.variantPrice.text = item.pricePerUnit
+            binding.variantPrice.text = item.pricePerUnit.toString()
         }
     }
 }

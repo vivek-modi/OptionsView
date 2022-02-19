@@ -1,6 +1,7 @@
 package com.example.optionsview
 
 import androidx.lifecycle.ViewModel
+import java.util.concurrent.atomic.AtomicReference
 
 class ActivityViewModel : ViewModel() {
 
@@ -27,12 +28,18 @@ class ActivityViewModel : ViewModel() {
                         if (productVariant.id == defaultValueId) {
                             tempHashMapNode.defaultValue.compareAndSet(false, true)
                         }
+                        productVariant.pricePerUnit?.value?.toDouble()
+                            ?.let {
+                                tempHashMapNode.pricePerUnit.compareAndSetIfLess(it)
+                            }
                     }
                     return@let
                 }
                 val tempNode = StrengthNode().apply {
                     value = strength
-                    pricePerUnit = productVariant.pricePerUnit?.value
+                    productVariant.pricePerUnit?.value?.toDouble()?.let {
+                        pricePerUnit.set(it)
+                    }
                     if (productVariant.id == defaultValueId) {
                         defaultValue.compareAndSet(false, true)
                     }
@@ -106,6 +113,16 @@ class ActivityViewModel : ViewModel() {
                 it.quantity?.value?.toInt() ?: 0   // or java.lang.Integer.MAX_VALUE
             }
         )
+    }
+
+    private fun AtomicReference<Double>.compareAndSetIfLess(newValue: Double): Boolean {
+        do {
+            val oldValue = get()
+            if (newValue > oldValue) {
+                return false
+            }
+        } while (!compareAndSet(oldValue, newValue))
+        return true
     }
 
     private fun getUnSortedDataList(): List<ProductVariant> {
@@ -255,35 +272,35 @@ class ActivityViewModel : ViewModel() {
                 ProductValue("25"),
                 ProductValue("2"),
                 ProductValue("1"),
-                ProductValue("1.50")
+                ProductValue("4.83")
             ),
             ProductVariant(
                 "1232",
                 ProductValue("25"),
                 ProductValue("2"),
                 ProductValue("3"),
-                ProductValue("1.50")
+                ProductValue("4.39")
             ),
             ProductVariant(
                 "13232",
                 ProductValue("25"),
                 ProductValue("2"),
                 ProductValue("6"),
-                ProductValue("1.50")
+                ProductValue("3.58")
             ),
             ProductVariant(
                 "122332",
                 ProductValue("25"),
                 ProductValue("2"),
                 ProductValue("9"),
-                ProductValue("1.50")
+                ProductValue("3.50")
             ),
             ProductVariant(
                 "11232",
                 ProductValue("25"),
                 ProductValue("2"),
                 ProductValue("12"),
-                ProductValue("1.50")
+                ProductValue("3.46")
             ),
             ProductVariant(
                 "123234",
@@ -458,7 +475,7 @@ class ActivityViewModel : ViewModel() {
                 ProductValue("25"),
                 ProductValue("14"),
                 ProductValue("12"),
-                ProductValue("1.50")
+                ProductValue("0.50")
             ),
             ProductVariant(
                 "12342",
