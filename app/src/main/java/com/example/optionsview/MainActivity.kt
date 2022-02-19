@@ -32,9 +32,30 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setupViewModel()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupView()
+    }
+
+    private fun setupViewModel() {
+        viewModel.strengthSearchIndex.observe(this) { index ->
+            binding.strengthRecyclerView.post {
+                strengthAdapter.selectedItemPosition = index
+            }
+        }
+
+        viewModel.quantitySearchIndex.observe(this) { index ->
+            binding.supplyRecyclerView.post {
+                supplyAdapter.selectedItemPosition = index
+            }
+        }
+
+        viewModel.subscriptionSearchIndex.observe(this) { index ->
+            binding.subscriptionRecyclerView.post {
+                subscriptionAdapter.selectedItemPosition = index
+            }
+        }
     }
 
     private fun setupView() {
@@ -43,24 +64,18 @@ class MainActivity : AppCompatActivity() {
             layoutManager =
                 LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
             adapter = strengthAdapter
-        }.post {
-            strengthAdapter.selectedItemPosition = viewModel.strengthSearchIndex
         }
 
         binding.supplyRecyclerView.apply {
             layoutManager =
                 LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
             adapter = supplyAdapter
-        }.post {
-            supplyAdapter.selectedItemPosition = viewModel.quantitySearchIndex
         }
 
         binding.subscriptionRecyclerView.apply {
             layoutManager =
                 LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
             adapter = subscriptionAdapter
-        }.post {
-            subscriptionAdapter.selectedItemPosition = viewModel.subscriptionSearchIndex
         }
     }
 }

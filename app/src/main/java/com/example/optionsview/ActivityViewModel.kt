@@ -1,5 +1,6 @@
 package com.example.optionsview
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
@@ -7,9 +8,9 @@ import kotlinx.coroutines.launch
 class ActivityViewModel : ViewModel() {
 
     var baseNode: VariantNode = VariantNode()
-    var strengthSearchIndex: Int = 0
-    var quantitySearchIndex: Int = 0
-    var subscriptionSearchIndex: Int = 0
+    var strengthSearchIndex: MutableLiveData<Int> = MutableLiveData()
+    var quantitySearchIndex: MutableLiveData<Int> = MutableLiveData()
+    var subscriptionSearchIndex: MutableLiveData<Int> = MutableLiveData()
     private val defaultValueId = "12643423243324"
 
     init {
@@ -86,15 +87,15 @@ class ActivityViewModel : ViewModel() {
     private fun getNodeDefaultValuePosition() {
         baseNode.children.mapIndexed { strengthIndex, strengthVariantNode ->
             if ((strengthVariantNode as StrengthNode).defaultValue.get()) {
-                strengthSearchIndex = strengthIndex
+                strengthSearchIndex.postValue(strengthIndex)
             }
             strengthVariantNode.children.mapIndexed { quantityIndex, quantityVariantNode ->
                 if ((quantityVariantNode as QuantityNode).defaultValue.get()) {
-                    quantitySearchIndex = quantityIndex
+                    quantitySearchIndex.postValue(quantityIndex)
                 }
                 quantityVariantNode.children.mapIndexed { index, variantNode ->
                     if ((variantNode as SubscriptionNode).defaultValue.get()) {
-                        subscriptionSearchIndex = index
+                        subscriptionSearchIndex.postValue(index)
                     }
                 }
             }
