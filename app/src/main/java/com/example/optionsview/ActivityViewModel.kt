@@ -9,6 +9,7 @@ class ActivityViewModel : ViewModel() {
     var baseNode: VariantNode = VariantNode()
     var strengthSearchIndex: Int = 0
     var quantitySearchIndex: Int = 0
+    var subsriptionSearchIndex: Int = 0
     private val defaultValueId = "12643423243324"
 
     init {
@@ -16,6 +17,7 @@ class ActivityViewModel : ViewModel() {
             createGraph()
             getStrengthNodeDefaultValuePosition()
             getQuantityNodeDefaultValuePosition()
+            getSubscriptionNodeDefaultValuePosition()
         }
     }
 
@@ -96,6 +98,18 @@ class ActivityViewModel : ViewModel() {
             strengthVariantNode.children.mapIndexed { index, variantNode ->
                 if ((variantNode as QuantityNode).defaultValue.get()) {
                     quantitySearchIndex = index
+                }
+            }
+        }
+    }
+
+    private fun getSubscriptionNodeDefaultValuePosition() {
+        baseNode.children.mapIndexed { _, strengthVariantNode ->
+            strengthVariantNode.children.mapIndexed { _, quantityVariantNode ->
+                quantityVariantNode.children.mapIndexed { index, variantNode ->
+                    if ((variantNode as SubscriptionNode).defaultValue.get()) {
+                        subsriptionSearchIndex = index
+                    }
                 }
             }
         }

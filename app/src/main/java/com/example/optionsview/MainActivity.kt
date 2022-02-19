@@ -59,6 +59,8 @@ class MainActivity : AppCompatActivity() {
             layoutManager =
                 LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
             adapter = subscriptionAdapter
+        }.post {
+            subscriptionAdapter.selectedItemPosition = viewModel.subsriptionSearchIndex
         }
     }
 }
