@@ -1,14 +1,13 @@
 package com.example.optionsview
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class ActivityViewModel : ViewModel() {
 
     var baseNode: VariantNode = VariantNode()
-    var strengthSearchIndex: MutableLiveData<Int> = MutableLiveData()
-    var quantitySearchIndex: MutableLiveData<Int> = MutableLiveData()
-    var subscriptionSearchIndex: MutableLiveData<Int> = MutableLiveData()
+    var strengthSearchIndex: Int = 0
+    var quantitySearchIndex: Int = 0
+    var subscriptionSearchIndex: Int = 0
     private val defaultValueId = "12643423243324"
 
     init {
@@ -83,15 +82,15 @@ class ActivityViewModel : ViewModel() {
     private fun getNodeDefaultValuePosition() {
         baseNode.children.mapIndexed { strengthIndex, strengthVariantNode ->
             if ((strengthVariantNode as StrengthNode).defaultValue.get()) {
-                strengthSearchIndex.postValue(strengthIndex)
+                strengthSearchIndex = strengthIndex
             }
             strengthVariantNode.children.mapIndexed { quantityIndex, quantityVariantNode ->
                 if ((quantityVariantNode as QuantityNode).defaultValue.get()) {
-                    quantitySearchIndex.postValue(quantityIndex)
+                    quantitySearchIndex = quantityIndex
                 }
                 quantityVariantNode.children.mapIndexed { index, variantNode ->
                     if ((variantNode as SubscriptionNode).defaultValue.get()) {
-                        subscriptionSearchIndex.postValue(index)
+                        subscriptionSearchIndex = index
                     }
                 }
             }

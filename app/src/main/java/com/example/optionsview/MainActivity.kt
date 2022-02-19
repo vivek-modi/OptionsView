@@ -32,33 +32,13 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setupViewModel()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setupView()
     }
 
-    private fun setupViewModel() {
-        viewModel.strengthSearchIndex.observe(this) { index ->
-            binding.strengthRecyclerView.post {
-                strengthAdapter.selectedItemPosition = index
-            }
-        }
-
-        viewModel.quantitySearchIndex.observe(this) { index ->
-            binding.supplyRecyclerView.post {
-                supplyAdapter.selectedItemPosition = index
-            }
-        }
-
-        viewModel.subscriptionSearchIndex.observe(this) { index ->
-            binding.subscriptionRecyclerView.post {
-                subscriptionAdapter.selectedItemPosition = index
-            }
-        }
-    }
-
     private fun setupView() {
+        strengthAdapter.selectedItemPosition = viewModel.strengthSearchIndex
         strengthAdapter.submitList(viewModel.baseNode.children)
         binding.strengthRecyclerView.apply {
             layoutManager =
@@ -66,12 +46,14 @@ class MainActivity : AppCompatActivity() {
             adapter = strengthAdapter
         }
 
+        supplyAdapter.selectedItemPosition = viewModel.quantitySearchIndex
         binding.supplyRecyclerView.apply {
             layoutManager =
                 LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
             adapter = supplyAdapter
         }
 
+        subscriptionAdapter.selectedItemPosition = viewModel.subscriptionSearchIndex
         binding.subscriptionRecyclerView.apply {
             layoutManager =
                 LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
