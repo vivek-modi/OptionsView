@@ -60,7 +60,7 @@ class MainActivity : AppCompatActivity() {
                 LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
             adapter = subscriptionAdapter
         }.post {
-            subscriptionAdapter.selectedItemPosition = viewModel.subsriptionSearchIndex
+            subscriptionAdapter.selectedItemPosition = viewModel.subscriptionSearchIndex
         }
     }
 }

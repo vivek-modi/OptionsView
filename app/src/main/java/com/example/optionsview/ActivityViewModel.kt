@@ -9,7 +9,7 @@ class ActivityViewModel : ViewModel() {
     var baseNode: VariantNode = VariantNode()
     var strengthSearchIndex: Int = 0
     var quantitySearchIndex: Int = 0
-    var subsriptionSearchIndex: Int = 0
+    var subscriptionSearchIndex: Int = 0
     private val defaultValueId = "12643423243324"
 
     init {
@@ -94,7 +94,7 @@ class ActivityViewModel : ViewModel() {
                 }
                 quantityVariantNode.children.mapIndexed { index, variantNode ->
                     if ((variantNode as SubscriptionNode).defaultValue.get()) {
-                        subsriptionSearchIndex = index
+                        subscriptionSearchIndex = index
                     }
                 }
             }
