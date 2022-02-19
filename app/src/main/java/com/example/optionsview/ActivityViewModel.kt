@@ -20,7 +20,7 @@ class ActivityViewModel : ViewModel() {
         val tempHashMap: MutableMap<String, VariantNode> = mutableMapOf()
         val sortedList = getSortedList()
 
-        sortedList.forEach { productVariant ->
+        sortedList.mapIndexed { _, productVariant ->
             productVariant.strength?.let { strength ->
                 val tempHashMapNode = tempHashMap["strength_${strength.value}"]
                 if (tempHashMapNode != null) {

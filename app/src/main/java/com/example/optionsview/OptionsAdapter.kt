@@ -1,7 +1,6 @@
 package com.example.optionsview
 
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 
@@ -45,15 +44,13 @@ class OptionsAdapter(
             selectedItemPosition = position
         }
 
-        val drawableColor = if (selectedItemPosition == position) {
+        if (selectedItemPosition == position) {
             itemClickListener.onClickItem(currentItem)
-            R.drawable.options_item_selected_background
+            holder.binding.root.isSelected = true
         } else {
-            R.drawable.options_item_default_background
+            holder.binding.root.isSelected = false
         }
 
-        holder.binding.root.background =
-            ContextCompat.getDrawable(holder.binding.root.context, drawableColor)
         holder.bindItem(currentItem)
     }
 

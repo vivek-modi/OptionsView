@@ -5,6 +5,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginEnd="10dp"
+    android:background="@drawable/options_item_selector_background"
     android:orientation="vertical"
     android:padding="5dp"
     tools:context=".MainActivity">

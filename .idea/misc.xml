@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/drawable-v24/options_item_default_background.xml" value="0.13" />
         <entry key="app/src/main/res/drawable-v24/options_item_selected_background.xml" value="0.13" />
+        <entry key="app/src/main/res/drawable/time_pass.xml" value="0.13" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.35648148148148145" />
         <entry key="app/src/main/res/layout/strength_item_layout.xml" value="0.35648148148148145" />
       </map>
