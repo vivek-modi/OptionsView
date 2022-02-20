@@ -1,5 +1,6 @@
 package com.example.optionsview
 
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -40,15 +41,15 @@ class OptionsAdapter(
 
     override fun onBindViewHolder(holder: OptionsViewHolder, position: Int) {
         val currentItem = getItem(position)
-        holder.binding.root.setOnClickListener {
+        holder.binding.textContainer.setOnClickListener {
             selectedItemPosition = position
         }
 
         if (selectedItemPosition == position) {
             itemClickListener.onClickItem(currentItem)
-            holder.binding.root.isSelected = true
+            holder.binding.textContainer.isSelected = true
         } else {
-            holder.binding.root.isSelected = false
+            holder.binding.textContainer.isSelected = false
         }
 
         holder.bindItem(currentItem)
