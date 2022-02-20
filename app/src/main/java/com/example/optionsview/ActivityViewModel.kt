@@ -9,6 +9,7 @@ class ActivityViewModel : ViewModel() {
     var strengthSearchIndex: Int = 0
     var quantitySearchIndex: Int = 0
     var subscriptionSearchIndex: Int = 0
+    var isFirstTime: Boolean = true
     private val defaultValueId = "12643423243324"
 
     init {
