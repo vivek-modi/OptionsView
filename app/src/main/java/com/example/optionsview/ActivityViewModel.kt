@@ -27,7 +27,7 @@ class ActivityViewModel : ViewModel() {
                 if (tempHashMapNode != null) {
                     if (tempHashMapNode is StrengthNode) {
                         if (productVariant.id == defaultValueId) {
-                            tempHashMapNode.defaultValue = true
+                            tempHashMapNode.isDefault = true
                         }
                         productVariant.pricePerUnit?.value?.toDouble()
                             ?.let {
@@ -42,7 +42,7 @@ class ActivityViewModel : ViewModel() {
                         pricePerUnit.set(it)
                     }
                     if (productVariant.id == defaultValueId) {
-                        defaultValue = true
+                        isDefault = true
                     }
                 }
                 baseNode.children.add(tempNode)
@@ -52,17 +52,15 @@ class ActivityViewModel : ViewModel() {
                 val tempHashMapNode =
                     tempHashMap["strength_${productVariant.strength?.value}_quantity_${quantity.value}"]
                 if (tempHashMapNode != null) {
-                    if (tempHashMapNode is QuantityNode) {
-                        if (productVariant.id == defaultValueId) {
-                            tempHashMapNode.defaultValue = true
-                        }
+                    if (productVariant.id == defaultValueId) {
+                        tempHashMapNode.isDefault = true
                     }
                     return@let
                 }
                 val tempNode = QuantityNode().apply {
                     value = quantity
                     if (productVariant.id == defaultValueId) {
-                        defaultValue = true
+                        isDefault = true
                     }
                 }
                 val parent =
@@ -75,7 +73,7 @@ class ActivityViewModel : ViewModel() {
                 val tempNode = SubscriptionNode().apply {
                     value = subscription
                     if (productVariant.id == defaultValueId) {
-                        defaultValue = true
+                        isDefault = true
                     }
                     this.productVariant = productVariant
                 }
@@ -90,15 +88,15 @@ class ActivityViewModel : ViewModel() {
 
     private fun getNodeDefaultValuePosition() {
         baseNode.children.mapIndexed { strengthIndex, strengthVariantNode ->
-            if ((strengthVariantNode as StrengthNode).defaultValue) {
+            if ((strengthVariantNode as StrengthNode).isDefault) {
                 strengthSearchIndex = strengthIndex
             }
             strengthVariantNode.children.mapIndexed { quantityIndex, quantityVariantNode ->
-                if ((quantityVariantNode as QuantityNode).defaultValue) {
+                if ((quantityVariantNode as QuantityNode).isDefault) {
                     quantitySearchIndex = quantityIndex
                 }
                 quantityVariantNode.children.mapIndexed { index, variantNode ->
-                    if ((variantNode as SubscriptionNode).defaultValue) {
+                    if ((variantNode as SubscriptionNode).isDefault) {
                         subscriptionSearchIndex = index
                     }
                 }

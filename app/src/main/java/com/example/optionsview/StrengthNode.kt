@@ -4,5 +4,4 @@ import java.util.concurrent.atomic.AtomicReference
 
 class StrengthNode : VariantNode() {
     var pricePerUnit = AtomicReference<Double>()
-    var defaultValue: Boolean = false
 }
