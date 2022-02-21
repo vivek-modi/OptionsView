@@ -13,11 +13,10 @@ class MainActivity : AppCompatActivity() {
     private val viewModel by viewModels<ActivityViewModel>()
     private val strengthItemClickListener = object : ItemClickListener {
         override fun onClickItem(currentItem: VariantNode) {
-            if (!viewModel.isFirstTime) {
+            if (!viewModel.isFirstTime.getAndSet(false)) {
                 supplyAdapter.selectedItemPosition = 0
                 subscriptionAdapter.selectedItemPosition = 0
             }
-            viewModel.isFirstTime = false
             supplyAdapter.submitList(currentItem.children)
         }
     }

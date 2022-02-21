@@ -1,6 +1,7 @@
 package com.example.optionsview
 
 import androidx.lifecycle.ViewModel
+import kotlinx.atomicfu.atomic
 import java.util.concurrent.atomic.AtomicReference
 
 class ActivityViewModel : ViewModel() {
@@ -9,7 +10,7 @@ class ActivityViewModel : ViewModel() {
     var strengthSearchIndex: Int = 0
     var quantitySearchIndex: Int = 0
     var subscriptionSearchIndex: Int = 0
-    var isFirstTime: Boolean = true
+    var isFirstTime = atomic(true)
     private val defaultValueId = "12643423243324"
 
     init {
