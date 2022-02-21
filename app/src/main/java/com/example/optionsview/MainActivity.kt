@@ -53,6 +53,7 @@ class MainActivity : AppCompatActivity() {
 
         supplyAdapter.selectedItemPosition = viewModel.quantitySearchIndex
         binding.supplyRecyclerView.apply {
+            itemAnimator = null
             layoutManager =
                 LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
             adapter = supplyAdapter
@@ -60,6 +61,7 @@ class MainActivity : AppCompatActivity() {
 
         subscriptionAdapter.selectedItemPosition = viewModel.subscriptionSearchIndex
         binding.subscriptionRecyclerView.apply {
+            itemAnimator = null
             layoutManager =
                 LinearLayoutManager(this@MainActivity, LinearLayoutManager.HORIZONTAL, false)
             adapter = subscriptionAdapter
