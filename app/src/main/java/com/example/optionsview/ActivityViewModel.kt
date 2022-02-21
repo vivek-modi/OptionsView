@@ -57,7 +57,7 @@ class ActivityViewModel : ViewModel() {
                     }
                     return@let
                 }
-                val tempNode = QuantityNode().apply {
+                val tempNode = VariantNode().apply {
                     value = quantity
                     if (productVariant.id == defaultValueId) {
                         isDefault = true
@@ -92,7 +92,7 @@ class ActivityViewModel : ViewModel() {
                 strengthSearchIndex = strengthIndex
             }
             strengthVariantNode.children.mapIndexed { quantityIndex, quantityVariantNode ->
-                if ((quantityVariantNode as QuantityNode).isDefault) {
+                if (quantityVariantNode.isDefault) {
                     quantitySearchIndex = quantityIndex
                 }
                 quantityVariantNode.children.mapIndexed { index, variantNode ->
