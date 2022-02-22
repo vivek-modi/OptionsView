@@ -58,7 +58,7 @@ class ActivityViewModel : ViewModel() {
                     }
                     return@let
                 }
-                val tempNode = VariantNode().apply {
+                val tempNode = QuantityNode().apply {
                     value = quantity
                     if (productVariant.id == defaultValueId) {
                         isDefault = true
