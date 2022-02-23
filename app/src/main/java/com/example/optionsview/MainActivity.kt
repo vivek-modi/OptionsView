@@ -23,6 +23,9 @@ class MainActivity : AppCompatActivity() {
     private val supplyItemClickListener = object : ItemClickListener {
         override fun onClickItem(currentItem: VariantNode) {
             subscriptionAdapter.submitList(currentItem.children)
+            currentItem.priorityQueue.peek()?.let {
+                subscriptionAdapter.bestValue = it
+            }
         }
     }
     private val subscriptionItemClickListener = object : ItemClickListener {

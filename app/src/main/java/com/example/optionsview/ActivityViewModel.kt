@@ -20,6 +20,7 @@ class ActivityViewModel : ViewModel() {
 
     private fun createGraph() {
         val tempHashMap: MutableMap<String, VariantNode> = mutableMapOf()
+//        val sortedList = getSubscriptionValue()
         val sortedList = getSortedList()
 
         sortedList.mapIndexed { _, productVariant ->
@@ -81,6 +82,7 @@ class ActivityViewModel : ViewModel() {
                 val parent =
                     tempHashMap["strength_${productVariant.strength?.value}_quantity_${productVariant.quantity?.value}"]
                         ?: baseNode
+                parent.priorityQueue.add(tempNode)
                 parent.children.add(tempNode)
             }
         }
@@ -89,7 +91,7 @@ class ActivityViewModel : ViewModel() {
 
     private fun getNodeDefaultValuePosition() {
         baseNode.children.mapIndexed { strengthIndex, strengthVariantNode ->
-            if ((strengthVariantNode as StrengthNode).isDefault) {
+            if (strengthVariantNode.isDefault) {
                 strengthSearchIndex = strengthIndex
             }
             strengthVariantNode.children.mapIndexed { quantityIndex, quantityVariantNode ->
@@ -97,7 +99,7 @@ class ActivityViewModel : ViewModel() {
                     quantitySearchIndex = quantityIndex
                 }
                 quantityVariantNode.children.mapIndexed { index, variantNode ->
-                    if ((variantNode as SubscriptionNode).isDefault) {
+                    if (variantNode.isDefault) {
                         subscriptionSearchIndex = index
                     }
                 }
@@ -833,11 +835,11 @@ class ActivityViewModel : ViewModel() {
 
     private fun getSubscriptionValue(): List<ProductVariant> {
         return listOf(
-            ProductVariant("1232643", null, null, ProductValue("1")),
-            ProductVariant("1324322643", null, null, ProductValue("3")),
-            ProductVariant("32432432", null, null, ProductValue("6")),
-            ProductVariant("324234324", null, null, ProductValue("9")),
-            ProductVariant("32432432434", null, null, ProductValue("12"))
+            ProductVariant("1232643", null, null, ProductValue("1"), ProductValue("4.83")),
+            ProductVariant("1324322643", null, null, ProductValue("3"), ProductValue("4.39")),
+            ProductVariant("32432432", null, null, ProductValue("6"), ProductValue("3.58")),
+            ProductVariant("324234324", null, null, ProductValue("9"), ProductValue("3.50")),
+            ProductVariant("32432432434", null, null, ProductValue("12"), ProductValue("3.46"))
         )
     }
 }

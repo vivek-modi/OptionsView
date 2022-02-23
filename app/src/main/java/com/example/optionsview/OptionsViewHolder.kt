@@ -21,7 +21,7 @@ class OptionsViewHolder(val binding: StrengthItemLayoutBinding) :
         }
     }
 
-    fun bindItem(item: VariantNode) {
+    fun bindItem(item: VariantNode, bestValue: VariantNode) {
         binding.variantText.text = item.value?.value
         when (item) {
             is StrengthNode -> {
@@ -36,6 +36,12 @@ class OptionsViewHolder(val binding: StrengthItemLayoutBinding) :
             is SubscriptionNode -> {
                 binding.variantPrice.visibility = View.VISIBLE
                 binding.variantPrice.text = item.productVariant?.pricePerUnit?.value.toString()
+
+                if (bestValue == item) {
+                    binding.popularContainer.visibility = View.VISIBLE
+                } else {
+                    binding.popularContainer.visibility = View.GONE
+                }
             }
         }
     }

@@ -1,6 +1,5 @@
 package com.example.optionsview
 
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -16,6 +15,8 @@ class OptionsAdapter(
             notifyItemChanged(oldPosition)
             notifyItemChanged(value)
         }
+
+    var bestValue = VariantNode()
 
     companion object {
         private val PRODUCT_VARIANT_COMPARATOR = object : DiffUtil.ItemCallback<VariantNode>() {
@@ -52,7 +53,7 @@ class OptionsAdapter(
             holder.binding.textContainer.isSelected = false
         }
 
-        holder.bindItem(currentItem)
+        holder.bindItem(currentItem, bestValue)
     }
 
 }
