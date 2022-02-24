@@ -131,6 +131,48 @@ class ActivityViewModel : ViewModel() {
     private fun getUnSortedDataList(): List<ProductVariant> {
         return listOf(
             ProductVariant(
+                "3412012",
+                ProductValue("200"),
+                ProductValue("2"),
+                ProductValue("1"),
+                ProductValue("54.50")
+            ),
+            ProductVariant(
+                "3412012",
+                ProductValue("175"),
+                ProductValue("2"),
+                ProductValue("1"),
+                ProductValue("12.50")
+            ),
+            ProductVariant(
+                "34122323012",
+                ProductValue("150"),
+                ProductValue("2"),
+                ProductValue("1"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                "3412012",
+                ProductValue("125"),
+                ProductValue("2"),
+                ProductValue("1"),
+                ProductValue("1.50")
+            ),
+            ProductVariant(
+                "130922",
+                ProductValue("100"),
+                ProductValue("2"),
+                ProductValue("1"),
+                ProductValue("5.50")
+            ),
+            ProductVariant(
+                "100302",
+                ProductValue("100"),
+                ProductValue("2"),
+                ProductValue("1"),
+                ProductValue("4.50")
+            ),
+            ProductVariant(
                 "12",
                 ProductValue("75"),
                 ProductValue("14"),
