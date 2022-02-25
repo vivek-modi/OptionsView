@@ -585,28 +585,28 @@ class ActivityViewModel : ViewModel() {
                 ProductValue("1.50")
             ),
             ProductVariant(
-                "12643243",
+                "12643232443",
                 ProductValue("50"),
                 ProductValue("6"),
                 ProductValue("1"),
                 ProductValue("1.50")
             ),
             ProductVariant(
-                "12643243",
+                "12643324243",
                 ProductValue("50"),
                 ProductValue("6"),
                 ProductValue("3"),
                 ProductValue("1.50")
             ),
             ProductVariant(
-                "12643243",
+                "12642343243",
                 ProductValue("50"),
                 ProductValue("6"),
                 ProductValue("6"),
                 ProductValue("1.50")
             ),
             ProductVariant(
-                "12643243",
+                "12643098243",
                 ProductValue("50"),
                 ProductValue("6"),
                 ProductValue("9"),
@@ -634,14 +634,14 @@ class ActivityViewModel : ViewModel() {
                 ProductValue("1.50")
             ),
             ProductVariant(
-                "12643243",
+                "1264324983",
                 ProductValue("50"),
                 ProductValue("12"),
                 ProductValue("6"),
                 ProductValue("1.50")
             ),
             ProductVariant(
-                "12643423423",
+                "1264342389423",
                 ProductValue("50"),
                 ProductValue("12"),
                 ProductValue("9"),
@@ -655,7 +655,7 @@ class ActivityViewModel : ViewModel() {
                 ProductValue("1.50")
             ),
             ProductVariant(
-                "12643243",
+                "12643249782343",
                 ProductValue("75"),
                 ProductValue("2"),
                 ProductValue("1"),
