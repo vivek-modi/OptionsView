@@ -7,20 +7,18 @@ import java.util.concurrent.atomic.AtomicReference
 class ActivityViewModel : ViewModel() {
 
     var baseNode: VariantNode = VariantNode()
-    var strengthSearchIndex: Int = 0
-    var quantitySearchIndex: Int = 0
-    var subscriptionSearchIndex: Int = 0
+    var strengthDefaultIndex = 0
+    var quantityDefaultIndex = 0
+    var subscriptionDefaultIndex = 0
     var isFirstTime = atomic(true)
     private val defaultValueId = "12643423243324"
 
     init {
         createGraph()
-        getNodeDefaultValuePosition()
     }
 
     private fun createGraph() {
         val tempHashMap: MutableMap<String, VariantNode> = mutableMapOf()
-//        val sortedList = getSubscriptionValue()
         val sortedList = getSortedList()
 
         sortedList.mapIndexed { _, productVariant ->
@@ -29,7 +27,7 @@ class ActivityViewModel : ViewModel() {
                 if (tempHashMapNode != null) {
                     if (tempHashMapNode is StrengthNode) {
                         if (productVariant.id == defaultValueId) {
-                            tempHashMapNode.isDefault = true
+                            strengthDefaultIndex = tempHashMapNode.strengthIndex
                         }
                         productVariant.pricePerUnit?.value?.toDouble()
                             ?.let {
@@ -44,7 +42,9 @@ class ActivityViewModel : ViewModel() {
                         pricePerUnit.set(it)
                     }
                     if (productVariant.id == defaultValueId) {
-                        isDefault = true
+                        strengthDefaultIndex = strengthIndex
+                    } else {
+                        strengthIndex++
                     }
                 }
                 baseNode.children.add(tempNode)
@@ -54,15 +54,21 @@ class ActivityViewModel : ViewModel() {
                 val tempHashMapNode =
                     tempHashMap["strength_${productVariant.strength?.value}_quantity_${quantity.value}"]
                 if (tempHashMapNode != null) {
-                    if (productVariant.id == defaultValueId) {
-                        tempHashMapNode.isDefault = true
+                    if (tempHashMapNode is QuantityNode) {
+                        if (productVariant.id == defaultValueId) {
+                            quantityDefaultIndex = tempHashMapNode.quantityIndex
+                        } else {
+                            tempHashMapNode.quantityIndex++
+                        }
                     }
                     return@let
                 }
                 val tempNode = QuantityNode().apply {
                     value = quantity
                     if (productVariant.id == defaultValueId) {
-                        isDefault = true
+                        quantityDefaultIndex = quantityIndex
+                    } else {
+                        quantityIndex++
                     }
                 }
                 val parent =
@@ -74,37 +80,23 @@ class ActivityViewModel : ViewModel() {
             productVariant.subscription?.let { subscription ->
                 val tempNode = SubscriptionNode().apply {
                     value = subscription
-                    if (productVariant.id == defaultValueId) {
-                        isDefault = true
-                    }
                     this.productVariant = productVariant
                 }
                 val parent =
                     tempHashMap["strength_${productVariant.strength?.value}_quantity_${productVariant.quantity?.value}"]
                         ?: baseNode
+                if (parent is QuantityNode) {
+                    if (productVariant.id == defaultValueId) {
+                        subscriptionDefaultIndex = parent.subscriptionIndex
+                    } else {
+                        parent.subscriptionIndex++
+                    }
+                }
                 parent.priorityQueue.add(tempNode)
                 parent.children.add(tempNode)
             }
         }
         baseNode
-    }
-
-    private fun getNodeDefaultValuePosition() {
-        baseNode.children.mapIndexed { strengthIndex, strengthVariantNode ->
-            if (strengthVariantNode.isDefault) {
-                strengthSearchIndex = strengthIndex
-            }
-            strengthVariantNode.children.mapIndexed { quantityIndex, quantityVariantNode ->
-                if (quantityVariantNode.isDefault) {
-                    quantitySearchIndex = quantityIndex
-                }
-                quantityVariantNode.children.mapIndexed { index, variantNode ->
-                    if (variantNode.isDefault) {
-                        subscriptionSearchIndex = index
-                    }
-                }
-            }
-        }
     }
 
     private fun getSortedList(): List<ProductVariant> {

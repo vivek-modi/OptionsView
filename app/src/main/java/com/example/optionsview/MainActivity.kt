@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupView() {
-        strengthAdapter.selectedItemPosition = viewModel.strengthSearchIndex
+        strengthAdapter.selectedItemPosition = viewModel.strengthDefaultIndex
         strengthAdapter.submitList(viewModel.baseNode.children)
         binding.strengthRecyclerView.apply {
             layoutManager =
@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
             adapter = strengthAdapter
         }
 
-        supplyAdapter.selectedItemPosition = viewModel.quantitySearchIndex
+        supplyAdapter.selectedItemPosition = viewModel.quantityDefaultIndex
         binding.supplyRecyclerView.apply {
             itemAnimator = null
             layoutManager =
@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
             adapter = supplyAdapter
         }
 
-        subscriptionAdapter.selectedItemPosition = viewModel.subscriptionSearchIndex
+        subscriptionAdapter.selectedItemPosition = viewModel.subscriptionDefaultIndex
         binding.subscriptionRecyclerView.apply {
             itemAnimator = null
             layoutManager =

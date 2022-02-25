@@ -5,7 +5,6 @@ import java.util.*
 open class VariantNode {
     var value: ProductValue? = null
     var children: MutableList<VariantNode> = arrayListOf()
-    var isDefault: Boolean = false
     val priorityQueue = PriorityQueue(100) { p0: VariantNode, p1: VariantNode ->
         val variantOne = (p0 as SubscriptionNode).productVariant?.pricePerUnit?.value?.toDouble()
         val variantTwo = (p1 as SubscriptionNode).productVariant?.pricePerUnit?.value?.toDouble()
