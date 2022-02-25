@@ -11,7 +11,7 @@ class ActivityViewModel : ViewModel() {
     var quantityDefaultIndex = 0
     var subscriptionDefaultIndex = 0
     var isFirstTime = atomic(true)
-    private val defaultValueId = "10923232"
+    private val defaultValueId = "11232"
 
     init {
         createGraph()
@@ -27,7 +27,11 @@ class ActivityViewModel : ViewModel() {
                 if (tempHashMapNode != null) {
                     if (tempHashMapNode is StrengthNode) {
                         if (productVariant.id == defaultValueId) {
-                            strengthDefaultIndex = ++tempHashMapNode.strengthIndex
+                            strengthDefaultIndex = if (tempHashMapNode.strengthIndex == 0) {
+                                tempHashMapNode.strengthIndex
+                            } else {
+                                ++tempHashMapNode.strengthIndex
+                            }
                         }
                         productVariant.pricePerUnit?.value?.toDouble()
                             ?.let {
@@ -61,9 +65,11 @@ class ActivityViewModel : ViewModel() {
                 if (tempHashMapNode != null) {
                     if (tempHashMapNode is QuantityNode) {
                         if (productVariant.id == defaultValueId) {
-                            quantityDefaultIndex = ++tempHashMapNode.quantityIndex
-                        } else {
-                            tempHashMapNode.quantityIndex++
+                            quantityDefaultIndex = if (tempHashMapNode.quantityIndex == 0) {
+                                tempHashMapNode.quantityIndex
+                            } else {
+                                ++tempHashMapNode.quantityIndex
+                            }
                         }
                     }
                     return@let
