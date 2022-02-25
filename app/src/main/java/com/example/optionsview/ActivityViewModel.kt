@@ -70,6 +70,8 @@ class ActivityViewModel : ViewModel() {
                             } else {
                                 ++tempHashMapNode.quantityIndex
                             }
+                        } else {
+                            tempHashMapNode.quantityIndex++
                         }
                     }
                     return@let
@@ -384,7 +386,7 @@ class ActivityViewModel : ViewModel() {
                 ProductValue("1.50")
             ),
             ProductVariant(
-                "13242",
+                "13209842",
                 ProductValue("25"),
                 ProductValue("4"),
                 ProductValue("12"),
@@ -398,7 +400,7 @@ class ActivityViewModel : ViewModel() {
                 ProductValue("1.50")
             ),
             ProductVariant(
-                "13242",
+                "13240880802",
                 ProductValue("25"),
                 ProductValue("6"),
                 ProductValue("3"),
@@ -440,7 +442,7 @@ class ActivityViewModel : ViewModel() {
                 ProductValue("1.50")
             ),
             ProductVariant(
-                "13242",
+                "13208808093342",
                 ProductValue("25"),
                 ProductValue("10"),
                 ProductValue("6"),
@@ -566,7 +568,7 @@ class ActivityViewModel : ViewModel() {
                 ProductValue("1.50")
             ),
             ProductVariant(
-                "13242",
+                "132489982",
                 ProductValue("50"),
                 ProductValue("4"),
                 ProductValue("1"),
