@@ -11,7 +11,7 @@ class ActivityViewModel : ViewModel() {
     var quantityDefaultIndex = 0
     var subscriptionDefaultIndex = 0
     var isFirstTime = atomic(true)
-    private val defaultValueId = "12643423243324"
+    private val defaultValueId = "10923232"
 
     init {
         createGraph()
@@ -27,7 +27,7 @@ class ActivityViewModel : ViewModel() {
                 if (tempHashMapNode != null) {
                     if (tempHashMapNode is StrengthNode) {
                         if (productVariant.id == defaultValueId) {
-                            strengthDefaultIndex = tempHashMapNode.strengthIndex
+                            strengthDefaultIndex = ++tempHashMapNode.strengthIndex
                         }
                         productVariant.pricePerUnit?.value?.toDouble()
                             ?.let {
@@ -42,9 +42,14 @@ class ActivityViewModel : ViewModel() {
                         pricePerUnit.set(it)
                     }
                     if (productVariant.id == defaultValueId) {
-                        strengthDefaultIndex = strengthIndex
-                    } else {
-                        strengthIndex++
+                        val lastItem = baseNode.children.lastOrNull()
+                        if (lastItem is StrengthNode) {
+                            strengthDefaultIndex = if (lastItem.strengthIndex == 0) {
+                                lastItem.strengthIndex
+                            } else {
+                                ++lastItem.strengthIndex
+                            }
+                        }
                     }
                 }
                 baseNode.children.add(tempNode)
@@ -56,7 +61,7 @@ class ActivityViewModel : ViewModel() {
                 if (tempHashMapNode != null) {
                     if (tempHashMapNode is QuantityNode) {
                         if (productVariant.id == defaultValueId) {
-                            quantityDefaultIndex = tempHashMapNode.quantityIndex
+                            quantityDefaultIndex = ++tempHashMapNode.quantityIndex
                         } else {
                             tempHashMapNode.quantityIndex++
                         }
@@ -66,9 +71,14 @@ class ActivityViewModel : ViewModel() {
                 val tempNode = QuantityNode().apply {
                     value = quantity
                     if (productVariant.id == defaultValueId) {
-                        quantityDefaultIndex = quantityIndex
-                    } else {
-                        quantityIndex++
+                        val lastItem = baseNode.children.lastOrNull()
+                        if (lastItem is QuantityNode) {
+                            quantityDefaultIndex = if (lastItem.quantityIndex == 0) {
+                                lastItem.quantityIndex
+                            } else {
+                                ++lastItem.quantityIndex
+                            }
+                        }
                     }
                 }
                 val parent =
@@ -312,7 +322,7 @@ class ActivityViewModel : ViewModel() {
                 ProductValue("4.83")
             ),
             ProductVariant(
-                "1232",
+                "10923232",
                 ProductValue("25"),
                 ProductValue("2"),
                 ProductValue("3"),
