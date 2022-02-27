@@ -80,11 +80,11 @@ class ActivityViewModel : ViewModel() {
                     value = quantity
                     if (productVariant.id == defaultValueId) {
                         val lastItem = baseNode.children.lastOrNull()
-                        if (lastItem is QuantityNode) {
-                            quantityDefaultIndex = if (lastItem.quantityIndex == 0) {
-                                lastItem.quantityIndex
+                        if (lastItem is StrengthNode) {
+                            quantityDefaultIndex = if (lastItem.children.size == 0) {
+                                quantityIndex
                             } else {
-                                ++lastItem.quantityIndex
+                                ++quantityIndex
                             }
                         }
                     }
@@ -372,7 +372,7 @@ class ActivityViewModel : ViewModel() {
                 ProductValue("1.50")
             ),
             ProductVariant(
-                "123232",
+                "1232090932",
                 ProductValue("25"),
                 ProductValue("4"),
                 ProductValue("6"),
