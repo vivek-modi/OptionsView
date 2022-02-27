@@ -65,13 +65,11 @@ class ActivityViewModel : ViewModel() {
                 if (tempHashMapNode != null) {
                     if (tempHashMapNode is QuantityNode) {
                         if (productVariant.id == defaultValueId) {
-                            quantityDefaultIndex = if (tempHashMapNode.quantityIndex == 0) {
+                            quantityDefaultIndex = if (tempHashMapNode.children.size == 0) {
                                 tempHashMapNode.quantityIndex
                             } else {
-                                ++tempHashMapNode.quantityIndex
+                                tempHashMapNode.quantityIndex++
                             }
-                        } else {
-                            tempHashMapNode.quantityIndex++
                         }
                     }
                     return@let
