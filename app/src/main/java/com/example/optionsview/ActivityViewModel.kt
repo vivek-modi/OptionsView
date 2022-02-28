@@ -34,8 +34,9 @@ class ActivityViewModel : ViewModel() {
 //    private val defaultValueId = "12643232443"  // 50 6 1
 //    private val defaultValueId = "1266576743324"  // 50 8 1
 //    private val defaultValueId = "12643249782343"  // 75 2 1
-    private val defaultValueId = "12643243"  // 75 8 9
+//    private val defaultValueId = "12643243"  // 75 8 9
 //    private val defaultValueId = "130922"  // 100 2 1
+    private val defaultValueId = "32432432"  // 6
 
     init {
         createGraph()
@@ -43,7 +44,7 @@ class ActivityViewModel : ViewModel() {
 
     private fun createGraph() {
         val tempHashMap: MutableMap<String, VariantNode> = mutableMapOf()
-        val sortedList = getSortedList()
+        val sortedList = getSubscriptionValue()
 
         sortedList.mapIndexed { _, productVariant ->
             productVariant.strength?.let { strength ->
@@ -80,13 +81,12 @@ class ActivityViewModel : ViewModel() {
             productVariant.quantity?.let { quantity ->
                 val strengthNode = baseNode.children.lastOrNull()
                 if (strengthNode is StrengthNode) {
+                    val strengthNodeChildrenSize = strengthNode.children.size
                     val tempHashMapNode =
                         tempHashMap["strength_${productVariant.strength?.value}_quantity_${quantity.value}"]
                     if (tempHashMapNode != null) {
                         if (tempHashMapNode is QuantityNode) {
                             if (productVariant.id == defaultValueId) {
-
-                                val strengthNodeChildrenSize = strengthNode.children.size
                                 quantityDefaultIndex = if (strengthNodeChildrenSize == 0) {
                                     strengthNodeChildrenSize
                                 } else {
@@ -99,7 +99,6 @@ class ActivityViewModel : ViewModel() {
                     val tempNode = QuantityNode().apply {
                         value = quantity
                         if (productVariant.id == defaultValueId) {
-                            val strengthNodeChildrenSize = strengthNode.children.size
                             quantityDefaultIndex = strengthNodeChildrenSize
                         }
                     }
