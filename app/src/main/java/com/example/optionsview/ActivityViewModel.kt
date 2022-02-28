@@ -22,7 +22,13 @@ class ActivityViewModel : ViewModel() {
 //    private val defaultValueId = "1232090932"  // 25 4 6
 //    private val defaultValueId = "13422"  // 25 4 9
 //    private val defaultValueId = "13209842"  // 25 4 12
-    private val defaultValueId = "122323"  // 25 6 1
+//    private val defaultValueId = "122323"  // 25 6 1
+//    private val defaultValueId = "13240880802"  // 25 6 3
+//    private val defaultValueId = "1322"  // 25 6 6
+//    private val defaultValueId = "1232324"  // 25 6 9
+//    private val defaultValueId = "12342787283"  // 25 6 12
+//    private val defaultValueId = "222"  // 25 8 1
+    private val defaultValueId = "222"  // 25 8 1
 
     init {
         createGraph()
@@ -77,12 +83,12 @@ class ActivityViewModel : ViewModel() {
                 if (tempHashMapNode != null) {
                     if (tempHashMapNode is QuantityNode) {
                         if (productVariant.id == defaultValueId) {
-
                             if (strengthNode is StrengthNode) {
-                                quantityDefaultIndex = if (strengthNode.children.size == 1) {
-                                    tempHashMapNode.quantityIndex
+                                val strengthNodeChildrenSize = strengthNode.children.size
+                                quantityDefaultIndex = if (strengthNodeChildrenSize == 0) {
+                                    strengthNodeChildrenSize
                                 } else {
-                                    ++tempHashMapNode.quantityIndex
+                                    strengthNodeChildrenSize.minus(1)
                                 }
                             }
                         }
@@ -93,10 +99,11 @@ class ActivityViewModel : ViewModel() {
                     value = quantity
                     if (productVariant.id == defaultValueId) {
                         if (strengthNode is StrengthNode) {
-                            quantityDefaultIndex = if (strengthNode.children.size == 0) {
-                                quantityIndex
+                            val strengthNodeChildrenSize = strengthNode.children.size
+                            quantityDefaultIndex = if (strengthNodeChildrenSize == 0) {
+                                strengthNodeChildrenSize
                             } else {
-                                ++quantityIndex
+                                strengthNodeChildrenSize
                             }
                         }
                     }
@@ -433,7 +440,7 @@ class ActivityViewModel : ViewModel() {
                 ProductValue("1.50")
             ),
             ProductVariant(
-                "12342",
+                "12342787283",
                 ProductValue("25"),
                 ProductValue("6"),
                 ProductValue("12"),
@@ -468,7 +475,7 @@ class ActivityViewModel : ViewModel() {
                 ProductValue("1.50")
             ),
             ProductVariant(
-                "12342",
+                "1237346646442",
                 ProductValue("25"),
                 ProductValue("10"),
                 ProductValue("12"),
@@ -496,14 +503,14 @@ class ActivityViewModel : ViewModel() {
                 ProductValue("1.50")
             ),
             ProductVariant(
-                "12342",
+                "12309756742",
                 ProductValue("25"),
                 ProductValue("12"),
                 ProductValue("9"),
                 ProductValue("1.50")
             ),
             ProductVariant(
-                "12324",
+                "1085382324",
                 ProductValue("25"),
                 ProductValue("12"),
                 ProductValue("12"),
@@ -545,21 +552,21 @@ class ActivityViewModel : ViewModel() {
                 ProductValue("0.50")
             ),
             ProductVariant(
-                "12342",
+                "12234234342",
                 ProductValue("50"),
                 ProductValue("2"),
                 ProductValue("1"),
                 ProductValue("1.50")
             ),
             ProductVariant(
-                "12342",
+                "123545642",
                 ProductValue("50"),
                 ProductValue("2"),
                 ProductValue("3"),
                 ProductValue("1.50")
             ),
             ProductVariant(
-                "12342",
+                "467612342",
                 ProductValue("50"),
                 ProductValue("2"),
                 ProductValue("6"),
