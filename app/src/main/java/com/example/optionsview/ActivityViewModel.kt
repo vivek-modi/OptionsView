@@ -28,7 +28,14 @@ class ActivityViewModel : ViewModel() {
 //    private val defaultValueId = "1232324"  // 25 6 9
 //    private val defaultValueId = "12342787283"  // 25 6 12
 //    private val defaultValueId = "222"  // 25 8 1
-    private val defaultValueId = "222"  // 25 8 1
+//    private val defaultValueId = "12234234342"  // 50 2 1
+//    private val defaultValueId = "123545642"  // 50 2 3
+//    private val defaultValueId = "132489982"  // 50 4 1
+//    private val defaultValueId = "12643232443"  // 50 6 1
+//    private val defaultValueId = "1266576743324"  // 50 8 1
+//    private val defaultValueId = "12643249782343"  // 75 2 1
+    private val defaultValueId = "12643243"  // 75 8 9
+//    private val defaultValueId = "130922"  // 100 2 1
 
     init {
         createGraph()
@@ -41,13 +48,14 @@ class ActivityViewModel : ViewModel() {
         sortedList.mapIndexed { _, productVariant ->
             productVariant.strength?.let { strength ->
                 val tempHashMapNode = tempHashMap["strength_${strength.value}"]
+                val childrenSize = baseNode.children.size
                 if (tempHashMapNode != null) {
                     if (tempHashMapNode is StrengthNode) {
                         if (productVariant.id == defaultValueId) {
-                            strengthDefaultIndex = if (tempHashMapNode.strengthIndex == 0) {
-                                tempHashMapNode.strengthIndex
+                            strengthDefaultIndex = if (childrenSize == 0) {
+                                childrenSize
                             } else {
-                                ++tempHashMapNode.strengthIndex
+                                childrenSize.minus(1)
                             }
                         }
                         productVariant.pricePerUnit?.value?.toDouble()
@@ -63,14 +71,7 @@ class ActivityViewModel : ViewModel() {
                         pricePerUnit.set(it)
                     }
                     if (productVariant.id == defaultValueId) {
-                        val lastItem = baseNode.children.lastOrNull()
-                        if (lastItem is StrengthNode) {
-                            strengthDefaultIndex = if (lastItem.strengthIndex == 0) {
-                                lastItem.strengthIndex
-                            } else {
-                                ++lastItem.strengthIndex
-                            }
-                        }
+                        strengthDefaultIndex = childrenSize
                     }
                 }
                 baseNode.children.add(tempNode)
@@ -99,11 +100,7 @@ class ActivityViewModel : ViewModel() {
                         value = quantity
                         if (productVariant.id == defaultValueId) {
                             val strengthNodeChildrenSize = strengthNode.children.size
-                            quantityDefaultIndex = if (strengthNodeChildrenSize == 0) {
-                                strengthNodeChildrenSize
-                            } else {
-                                strengthNodeChildrenSize
-                            }
+                            quantityDefaultIndex = strengthNodeChildrenSize
                         }
                     }
                     val parent =
@@ -192,13 +189,6 @@ class ActivityViewModel : ViewModel() {
                 ProductValue("2"),
                 ProductValue("1"),
                 ProductValue("5.50")
-            ),
-            ProductVariant(
-                "100302",
-                ProductValue("100"),
-                ProductValue("2"),
-                ProductValue("1"),
-                ProductValue("4.50")
             ),
             ProductVariant(
                 "12",
