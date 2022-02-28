@@ -53,6 +53,7 @@ class ActivityViewModel : ViewModel() {
                 if (tempHashMapNode != null) {
                     if (tempHashMapNode is StrengthNode) {
                         if (productVariant.id == defaultValueId) {
+                            tempHashMapNode.isPopular = true
                             strengthDefaultIndex = if (childrenSize == 0) {
                                 childrenSize
                             } else {
@@ -72,6 +73,7 @@ class ActivityViewModel : ViewModel() {
                         pricePerUnit.set(it)
                     }
                     if (productVariant.id == defaultValueId) {
+                        isPopular = true
                         strengthDefaultIndex = childrenSize
                     }
                 }
