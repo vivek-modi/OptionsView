@@ -85,18 +85,16 @@ class ActivityViewModel : ViewModel() {
                     val tempHashMapNode =
                         tempHashMap["strength_${productVariant.strength?.value}_quantity_${quantity.value}"]
                     if (tempHashMapNode != null) {
-                        if (tempHashMapNode is QuantityNode) {
-                            if (productVariant.id == defaultValueId) {
-                                quantityDefaultIndex = if (strengthNodeChildrenSize == 0) {
-                                    strengthNodeChildrenSize
-                                } else {
-                                    strengthNodeChildrenSize.minus(1)
-                                }
+                        if (productVariant.id == defaultValueId) {
+                            quantityDefaultIndex = if (strengthNodeChildrenSize == 0) {
+                                strengthNodeChildrenSize
+                            } else {
+                                strengthNodeChildrenSize.minus(1)
                             }
                         }
                         return@let
                     }
-                    val tempNode = QuantityNode().apply {
+                    val tempNode = VariantNode().apply {
                         value = quantity
                         if (productVariant.id == defaultValueId) {
                             quantityDefaultIndex = strengthNodeChildrenSize
@@ -117,12 +115,8 @@ class ActivityViewModel : ViewModel() {
                 val parent =
                     tempHashMap["strength_${productVariant.strength?.value}_quantity_${productVariant.quantity?.value}"]
                         ?: baseNode
-                if (parent is QuantityNode) {
-                    if (productVariant.id == defaultValueId) {
-                        subscriptionDefaultIndex = parent.subscriptionIndex
-                    } else {
-                        parent.subscriptionIndex++
-                    }
+                if (productVariant.id == defaultValueId) {
+                    subscriptionDefaultIndex = parent.children.size
                 }
                 parent.priorityQueue.add(tempNode)
                 parent.children.add(tempNode)
