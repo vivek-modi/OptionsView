@@ -12,7 +12,7 @@ class ActivityViewModel : ViewModel() {
     var subscriptionDefaultIndex = 0
     var isFirstTime = atomic(true)
 
-//    private val defaultValueId = "1232"  // 25 2 1
+    //    private val defaultValueId = "1232"  // 25 2 1
 //    private val defaultValueId = "10923232"  // 25 2 3
 //    private val defaultValueId = "13232"  // 25 2 6
 //    private val defaultValueId = "122332"  // 25 2 9
@@ -78,12 +78,13 @@ class ActivityViewModel : ViewModel() {
             }
             productVariant.quantity?.let { quantity ->
                 val strengthNode = baseNode.children.lastOrNull()
-                val tempHashMapNode =
-                    tempHashMap["strength_${productVariant.strength?.value}_quantity_${quantity.value}"]
-                if (tempHashMapNode != null) {
-                    if (tempHashMapNode is QuantityNode) {
-                        if (productVariant.id == defaultValueId) {
-                            if (strengthNode is StrengthNode) {
+                if (strengthNode is StrengthNode) {
+                    val tempHashMapNode =
+                        tempHashMap["strength_${productVariant.strength?.value}_quantity_${quantity.value}"]
+                    if (tempHashMapNode != null) {
+                        if (tempHashMapNode is QuantityNode) {
+                            if (productVariant.id == defaultValueId) {
+
                                 val strengthNodeChildrenSize = strengthNode.children.size
                                 quantityDefaultIndex = if (strengthNodeChildrenSize == 0) {
                                     strengthNodeChildrenSize
@@ -92,13 +93,11 @@ class ActivityViewModel : ViewModel() {
                                 }
                             }
                         }
+                        return@let
                     }
-                    return@let
-                }
-                val tempNode = QuantityNode().apply {
-                    value = quantity
-                    if (productVariant.id == defaultValueId) {
-                        if (strengthNode is StrengthNode) {
+                    val tempNode = QuantityNode().apply {
+                        value = quantity
+                        if (productVariant.id == defaultValueId) {
                             val strengthNodeChildrenSize = strengthNode.children.size
                             quantityDefaultIndex = if (strengthNodeChildrenSize == 0) {
                                 strengthNodeChildrenSize
@@ -107,12 +106,12 @@ class ActivityViewModel : ViewModel() {
                             }
                         }
                     }
+                    val parent =
+                        tempHashMap["strength_${productVariant.strength?.value}"] ?: baseNode
+                    parent.children.add(tempNode)
+                    tempHashMap["strength_${productVariant.strength?.value}_quantity_${quantity.value}"] =
+                        tempNode
                 }
-                val parent =
-                    tempHashMap["strength_${productVariant.strength?.value}"] ?: baseNode
-                parent.children.add(tempNode)
-                tempHashMap["strength_${productVariant.strength?.value}_quantity_${quantity.value}"] =
-                    tempNode
             }
             productVariant.subscription?.let { subscription ->
                 val tempNode = SubscriptionNode().apply {
