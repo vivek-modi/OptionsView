@@ -34,9 +34,9 @@ class ActivityViewModel : ViewModel() {
 //    private val defaultValueId = "12643232443"  // 50 6 1
 //    private val defaultValueId = "1266576743324"  // 50 8 1
 //    private val defaultValueId = "12643249782343"  // 75 2 1
-//    private val defaultValueId = "12643243"  // 75 8 9
+    private val defaultValueId = "12643243"  // 75 8 9
 //    private val defaultValueId = "130922"  // 100 2 1
-    private val defaultValueId = "32432432"  // 6
+//    private val defaultValueId = "32432432"  // 6
 
     init {
         createGraph()
@@ -44,7 +44,7 @@ class ActivityViewModel : ViewModel() {
 
     private fun createGraph() {
         val tempHashMap: MutableMap<String, VariantNode> = mutableMapOf()
-        val sortedList = getSubscriptionValue()
+        val sortedList = getSortedList()
 
         sortedList.mapIndexed { _, productVariant ->
             productVariant.strength?.let { strength ->
