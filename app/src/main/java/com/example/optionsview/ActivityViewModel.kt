@@ -60,7 +60,7 @@ class ActivityViewModel : ViewModel() {
                                 childrenSize.minus(1)
                             }
                         }
-                        productVariant.pricePerUnit?.value?.toDouble()
+                        productVariant.pricePerUnit?.valueInDouble
                             ?.let {
                                 tempHashMapNode.pricePerUnit.compareAndSetIfLess(it)
                             }
@@ -69,9 +69,8 @@ class ActivityViewModel : ViewModel() {
                 }
                 val tempNode = StrengthNode().apply {
                     value = strength
-                    productVariant.pricePerUnit?.value?.toDouble()?.let {
-                        pricePerUnit.set(it)
-                    }
+                    pricePerUnit.set(productVariant.pricePerUnit?.valueInDouble)
+
                     if (productVariant.id == defaultValueId) {
                         isPopular = true
                         strengthDefaultIndex = childrenSize
