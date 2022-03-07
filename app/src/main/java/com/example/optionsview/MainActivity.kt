@@ -17,12 +17,12 @@ class MainActivity : AppCompatActivity() {
                 supplyAdapter.selectedItemPosition = 0
                 subscriptionAdapter.selectedItemPosition = 0
             }
-            supplyAdapter.submitList(currentItem.children)
+//            supplyAdapter.submitList(currentItem.children)
         }
     }
     private val supplyItemClickListener = object : ItemClickListener {
         override fun onClickItem(currentItem: VariantNode) {
-            subscriptionAdapter.submitList(currentItem.children)
+//            subscriptionAdapter.submitList(currentItem.children)
             currentItem.priorityQueue.peek()?.let {
                 subscriptionAdapter.bestValue = it
             }
