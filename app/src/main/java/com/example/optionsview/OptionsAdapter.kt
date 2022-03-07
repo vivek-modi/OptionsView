@@ -37,7 +37,12 @@ class OptionsAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OptionsViewHolder {
-        return OptionsViewHolder.bindView(parent)
+        val currentItem = currentList[viewType]
+        return if (currentItem is StrengthNode) {
+            OptionsViewHolder.bindView(parent, currentItem)
+        } else {
+            OptionsViewHolder.bindView(parent)
+        }
     }
 
     override fun onBindViewHolder(holder: OptionsViewHolder, position: Int) {

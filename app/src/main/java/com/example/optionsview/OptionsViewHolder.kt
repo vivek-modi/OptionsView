@@ -10,13 +10,18 @@ class OptionsViewHolder(val binding: StrengthItemLayoutBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     companion object {
-        fun bindView(parent: ViewGroup): OptionsViewHolder {
+        fun bindView(parent: ViewGroup, currentItem: VariantNode? = null): OptionsViewHolder {
+            val view = StrengthItemLayoutBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+            if (currentItem is StrengthNode) {
+                val lp = view.textContainer.layoutParams
+                lp.width = (parent.measuredWidth) / 3
+            }
             return OptionsViewHolder(
-                StrengthItemLayoutBinding.inflate(
-                    LayoutInflater.from(parent.context),
-                    parent,
-                    false
-                )
+                view
             )
         }
     }
